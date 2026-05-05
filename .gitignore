@@ -1,0 +1,8 @@
+# Compiled ProtoFlux
+*.brson
+
+# LSP debug logs
+ProtoGraph_Logs/*
+
+# Resolved dependencies
+pgx/*

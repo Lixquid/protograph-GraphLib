@@ -1,0 +1,13 @@
+/// Ensures `String` is at least `Length` characters long, inserting
+/// `PadCharacter` at the end of the string until it is long enough.
+module PadEnd
+
+in String: string
+in Length: int
+in PadCharacter: char
+
+where String->ConcatenateString(
+	PadCharacter->ToString_Char->MultiplyString(
+		Length - String->StringLength
+	)
+)
