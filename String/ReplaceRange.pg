@@ -1,0 +1,16 @@
+/// Replaces a section of the given `String` from `StartPos` (inclusive) to
+/// `EndPos` (exclusive) with `Replacement`.
+module ReplaceRange
+
+in String: string
+in StartPos: int
+in EndPos: int
+in Replacement: string
+
+out this: string
+
+where ConcatenateMultiString([
+	String->Substring(0, StartPos),
+	Replacement,
+	String->Substring(EndPos)
+])
