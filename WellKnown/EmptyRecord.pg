@@ -1,0 +1,7 @@
+/// A reference to the empty dynamic record (a slot with a
+/// `DynamicVariableSpace` component) in the compiled ProtoGraph module.
+module EmptyRecord
+
+out this: Slot
+
+where ~input<Slot>("ProtoGraphModule/Template.EmptyDynamicRecord").Value

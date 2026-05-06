@@ -1,0 +1,7 @@
+/// A reference to the Heap Slot, an empty slot guaranteed to exist in the
+/// compiled ProtoGraph module.
+module HeapSlot
+
+out this: Slot
+
+where ~input<Slot>("ProtoGraphModule/Heap").Value

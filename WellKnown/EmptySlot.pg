@@ -1,0 +1,6 @@
+/// A reference to the empty slot in the compiled ProtoGraph module.
+module EmptySlot
+
+out this: Slot
+
+where ~input<Slot>("ProtoGraphModule/Template.EmptySlot").Value
