@@ -1,0 +1,10 @@
+/// Detects the current audio DSP settings at the given point.
+module SampleAudioDSP
+
+/// Type: AudioDSP_Effect
+/// Sampling Recommendation: ReferenceSpatialVariableCollector
+out VariableName: string
+
+where {
+	VariableName = "Resonite.Audio.Filters";
+}

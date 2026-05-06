@@ -1,0 +1,19 @@
+/// Detects the current heat differential at the current point. A positive
+/// value is a heat source, a negative value is a heat sink.
+///
+/// Suggested Values:
+/// - A few metres from a fire: `1`
+/// - Cooking: `10`
+/// - Slightly cold: `-1`
+/// - Freezing: `-10`
+module SampleHeat
+
+in Position: float3
+
+out this: float
+
+where SampleNumericSpatialVariable<float>(
+	Point = Position,
+	Name = "Heat",
+	Mode = ValueSpatialVariableMode.Additive,
+)

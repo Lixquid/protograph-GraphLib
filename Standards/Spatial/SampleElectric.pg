@@ -1,0 +1,12 @@
+/// Detects if the current point is in an electric field; objects should be
+/// shocked and devices should be turned on if this is true.
+module SampleElectric
+
+in Position: float3
+
+out this: bool
+
+where SampleValueSpatialVariable<bool>(
+	Point = Position,
+	Name = "Electric",
+)

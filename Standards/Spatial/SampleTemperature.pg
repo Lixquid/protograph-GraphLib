@@ -1,0 +1,17 @@
+/// Detects the current temperature at the given point. If no spatial value is
+/// detected, the ambient world temperature will be returned, otherwise 15℃.
+module SampleTemperature
+
+in Position: float3
+
+out this: Temperature
+
+where SampleNumericSpatialVariable<Temperature>(
+	Point = Position,
+	Name = "Temperature",
+	Mode = ValueSpatialVariableMode.PrioritySortedBlend,
+	BaseValue = {
+		_t = ~input<Temperature>("World/Temperature");
+		if _t.HasValue then _t.Value else 288.15d->FromBaseValue<Temperature>
+	}
+)

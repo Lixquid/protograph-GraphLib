@@ -1,0 +1,18 @@
+/// Detects the current gravity direction and strength at the given point. If
+/// no spatial value is detected, the world gravity will be returned, otherwise
+/// 9.81 m/s² negative Y.
+module SampleGravity
+
+in Position: float3
+
+out this: float3
+
+where SampleNumericSpatialVariable<float3>(
+	Point = Position,
+	Name = "Gravity",
+	Mode = ValueSpatialVariableMode.PrioritySortedBlend,
+	BaseValue = {
+		_g = ~input<float3>("World/Gravity");
+		if _g.HasValue then _g.Value else pack(0.0, -9.81, 0.0)
+	}
+)

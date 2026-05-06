@@ -1,0 +1,11 @@
+/// Detects the current wind speed at the given point in metres per second.
+module SampleWind
+
+in Position: float3
+
+out this: float3
+
+where SampleValueSpatialVariable<float3>(
+	Point = Position,
+	Name = "Wind",
+)
