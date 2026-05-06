@@ -1,0 +1,18 @@
+/// Destroys the given slot, moving all of its children to the `Destination`
+/// slot, or to the destroyed slot's parent if `Destination` is not provided.
+module DestroySlotPreservingChildren
+
+in Slot: slot
+in Destination: slot
+
+out this: Impulse
+
+where {
+	impulse {
+		_target = Destination ?? Slot->GetParentSlot;
+		for _i = 0 to Slot->ChildrenCount - 1 do impulse {
+			Slot->GetChild(0)->SetParent(_target);
+		};
+		Slot->DestroySlot();
+	}
+}
