@@ -1,0 +1,7 @@
+/// Returns if the current world is "Userspace", the world instance where the
+/// dash and facet anchors exist.
+module WorldIsUserspace
+
+out this: bool
+
+where WorldName == "Userspace"

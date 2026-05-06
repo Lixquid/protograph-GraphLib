@@ -1,0 +1,10 @@
+/// Returns if the given Slot is a "Holder" slot.
+///
+/// Holders slots are created when something is spawned from the inventory, or
+/// transfer grabbed from another instance.
+module SlotIsHolder
+
+in Slot: Slot
+out this: bool
+
+where Slot->ChildrenCount == 1 and Slot->GetSlotName == "Holder"
