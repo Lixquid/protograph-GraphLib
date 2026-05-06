@@ -1,0 +1,23 @@
+/// Converts a linear RGB color to Oklab color space.
+module LinearRGBToOklab
+
+in LinearRGB: colorX
+
+/// The oklab color as [Lightness, a (green-red), b (blue-yellow)]
+out this: float3
+
+where {
+	_color = LinearRGB->Unpack_ColorX;
+	_rgb = pack(_color.R, _color.G, _color.B);
+	_lms = PackRows_Float3x3(
+		pack(0.4122214708, 0.2126390059, 0.0193308187),
+		pack(0.5363325363, 0.7151686788, 0.1191947798),
+		pack(0.0514459929, 0.0721923153, 0.9505321522)
+	) * _rgb;
+	_LinearLMS = _lms->NthRoot_Float3(3.0);
+	PackRows_Float3x3(
+		pack(0.2104542553, 0.7936177850, -0.0040720468),
+		pack(1.9779984951, -2.4285922050, 0.4505937099),
+		pack(0.0259040371, 0.7827717662, -0.8086757660)
+	) * _LinearLMS;
+}

@@ -1,0 +1,17 @@
+/// Converts an Oklch color to Oklab color space.
+module OklchToOklab
+
+/// The oklch color as [Lightness, Chroma, Hue]
+in Oklch: float3
+
+/// The oklab color as [Lightness, a (green-red), b (blue-yellow)]
+out this: float3
+
+where {
+	_l, _c, _h = Oklch->Unpack_Float3;
+
+	_hRad = _h * DegToRad;
+	_a = _c * _hRad->Cos_Float;
+	_b = _c * _hRad->Sin_Float;
+	pack(_l, _a, _b);
+}
