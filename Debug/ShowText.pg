@@ -1,0 +1,20 @@
+/// Displays a line of text in front of the user that created the object.
+module ShowText
+
+/// The message to show
+in Text: string
+/// The duration to show the message for, in seconds.
+in Duration: float
+
+out this: SyncImpulse
+
+where {
+	_root = LocalUserRoot;
+	_pos = ViewPosition + ViewRotation->Mul_FloatQ_Float3(GetForward());
+	DebugText(
+		Position = _pos,
+		Text = Text,
+		Size = 1.0,
+		Duration = Duration,
+	)
+}

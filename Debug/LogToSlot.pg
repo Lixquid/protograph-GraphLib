@@ -1,0 +1,16 @@
+/// Creates a new slot with the given name as a rudimentary way to log values.
+module LogToSlot
+
+/// The slot to put logged messages under.
+in LogRoot: Slot element
+/// The message to log.
+in Message: string
+
+out this: SyncImpulse
+
+use Slot/NewSlot
+
+where impulse {
+	bind _new = LogRoot->NewSlot;
+	_new.Slot->SetSlotName(Message);
+}
