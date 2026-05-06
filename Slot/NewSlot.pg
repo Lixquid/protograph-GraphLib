@@ -1,0 +1,14 @@
+/// Creates a new empty slot in the specified location.
+module NewSlot
+
+in Destination: Slot
+
+out this: SyncImpulse
+out Slot: Slot
+
+use WellKnown/EmptySlot
+
+where impulse {
+	bind _duplicate = EmptySlot->DuplicateSlot(Destination);
+	Slot = _duplicate.Duplicate;
+}
