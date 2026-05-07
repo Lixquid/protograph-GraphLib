@@ -1,0 +1,53 @@
+/// Converts a ResRec URL to a ResDB URL by performing a lookup on the Resonite
+/// API. The ResRec URL should be in the format `resrec:///OwnerID/ResourceID`
+/// or `OwnerID/ResourceID`.
+module ResrecToResdb
+
+in Resrec: string
+in OnSuccess: AsyncImpulse
+in OnFailure: AsyncImpulse
+out this: AsyncImpulse
+out Resdb: string
+
+where {
+	ResrecWithoutProtocol = Resrec->ReplaceFirstSubstring(
+		"resrec:///",
+		"",
+		ComparisonMode = StringComparison.OrdinalIgnoreCase
+	);
+
+	SlashPos = ResrecWithoutProtocol->IndexOfString("/");
+	OwnerID = ResrecWithoutProtocol->Substring(Length = SlashPos);
+	ResourceID = ResrecWithoutProtocol->Substring(StartIndex = SlashPos + 1);
+	OwnedByUser = OwnerID->StartsWith("U-");
+
+	local Resdb: string;
+
+	impulse {
+		_ownerType = if OwnedByUser then "users" else "groups";
+		_url = $"https://api.resonite.com/{_ownerType}/{OwnerID}/records/{ResourceID}"->StringToAbsoluteURI;
+
+		switch RequestHostAccess("https://api.resonite.com", Port = 443, Reason = "Get ResDB URL", Scope = HostAccessScope.HTTP)
+		| OnGranted |> impulse {
+			switch _url->GET_String
+			| OnResponse _response |> impulse {
+				_assetPos = _response.Content->IndexOfString("\"assetUri\":\"");
+				_startPos = _assetPos + 12;
+				_endPos = _response.Content->IndexOfString("\"", StartIndex = _startPos);
+				_resdb = _response.Content->Substring(_startPos, _endPos - _startPos);
+
+				// _isHttpOK = _response.StatusCode == StatusCode.OK;
+				_startsWithResdb = _resdb->StartsWith("resdb");
+
+				if _startsWithResdb then impulse {
+					Resdb <- _resdb;
+					OnSuccess;
+				} else OnFailure;
+			}
+			| OnError |> OnFailure
+			| OnDenied |> OnFailure;
+		}
+		| OnDenied |> OnFailure
+		| OnIgnored |> OnFailure;
+	};
+}
