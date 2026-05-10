@@ -1,4 +1,4 @@
-/// Displays a line of text in front of the user that created the object.
+/// Displays a line of text in front of the user that is running the impulse.
 module ShowText
 
 /// The message to show
