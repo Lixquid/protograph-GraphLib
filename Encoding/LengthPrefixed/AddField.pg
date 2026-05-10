@@ -1,0 +1,15 @@
+/// Adds a Length Prefixed field to the given string.
+module AddField
+
+in Output: string mutable
+in Field: string
+
+out this: SyncImpulse
+
+where impulse {
+    Output <- ConcatenateMultiString([
+        Output,
+        Field->StringLength->FromUTF16->ToString_Char,
+        Field
+    ]);
+}

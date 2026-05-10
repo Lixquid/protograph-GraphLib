@@ -1,0 +1,24 @@
+/// Parses the given Length Prefixed string, and emits data events for each field.
+module Parse
+
+/// The Length Prefixed string to parse.
+in String: string
+/// The impulse to trigger for each field that is parsed.
+in OnField: Impulse
+
+out this: SyncImpulse
+out Field: string
+
+where impulse {
+    local _i: int;
+
+    _length = String->GetCharacter(_i)->as<int>;
+    Field = String->Substring(_i + 1, _length);
+
+    while _i < String->StringLength do impulse {
+        OnField;
+        _i <- _i + 1 + _length;
+        // No-op to work around issue #256
+        ValueIncrement<int>();
+    }
+}
