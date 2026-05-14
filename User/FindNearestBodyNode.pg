@@ -1,0 +1,27 @@
+/// Finds the nearest BodyNode of a user to a given position in global space.
+module FindNearestBodyNode
+
+in User: User
+in Position: float3
+
+out NearestNode: Renderite.Shared.BodyNode
+out this: SyncImpulse
+
+where impulse {
+    local _bestNode: Renderite.Shared.BodyNode;
+    local _curNode: Renderite.Shared.BodyNode;
+    local _distance: float;
+
+    _curNode <- BodyNode.NONE->NextValue;
+    _distance <- 9e999;
+    
+    while _curNode != BodyNode.NONE do impulse {
+        _d = Position->Distance_Float3(User->BodyNodeSlot(_curNode)->GlobalTransform.GlobalPosition);
+        if _d < _distance then impulse {
+            _distance <- _d;
+            _bestNode <- _curNode;
+        };
+        _curNode <- _curNode->NextValue;
+    };
+    NearestNode = _bestNode;
+}
