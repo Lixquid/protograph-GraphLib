@@ -1,0 +1,18 @@
+/// Runs the given impulse on the specified User.
+/// 
+/// **NOTE!** Because this relies on pushing a value to a Data Model Store,
+/// multiple calls in a single frame will only trigger once!
+module RunAsUser
+
+in User: User
+in Impulse: SyncImpulse
+
+out this: SyncImpulse
+
+where {
+    sync ChangingValue: int;
+    
+    switch User->FireOnValueChange(ChangingValue, Impulse);
+    
+    ChangingValue<-RandomInt(-2147483648, 2147483647);
+}
