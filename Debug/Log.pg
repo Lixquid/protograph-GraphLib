@@ -1,0 +1,7 @@
+/// Generates a `Log` event that any receiver in the World can listen to.
+module Log
+
+in Message: string
+out this: SyncImpulse
+
+where RootSlot->~trigger("Log", Message)
