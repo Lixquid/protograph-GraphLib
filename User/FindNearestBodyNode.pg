@@ -5,6 +5,7 @@ in User: User
 in Position: float3
 
 out NearestNode: Renderite.Shared.BodyNode
+out Distance: float
 out this: SyncImpulse
 
 where impulse {
@@ -24,4 +25,5 @@ where impulse {
         _curNode <- _curNode->NextValue;
     };
     NearestNode = _bestNode;
+    Distance = _distance;
 }
