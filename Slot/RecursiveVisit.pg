@@ -1,0 +1,43 @@
+/// Runs the given `OnSlot` impulse for the given `Root` slot and all of its
+/// children, recursively. The `SkipChildren` value can be set to `true` to
+/// skip visiting the children of the current slot.
+/// 
+/// ### Example
+/// 
+/// ```protograph
+/// switch RecursiveVisit(MySlot)
+/// | OnSlot _visit |> impulse {
+///     _visit.Slot->DoSomethingWithSlot();
+/// 
+///     if _visit.Slot->HasUglyChildren then {
+///         _visit.SkipChildren <- true;
+///     };
+/// }
+/// ```
+module RecursiveVisit
+
+in Root: Slot element
+in OnSlot: AsyncImpulse
+out this: AsyncImpulse
+out Slot: Slot
+out SkipChildren: bool mutable
+
+where {
+    local Slot: Slot;
+    local SkipChildren: bool;
+    
+    impulse {
+        Slot <- Root;
+        switch AsyncCallRelay
+        | OnTriggered _relay |> impulse {
+            OnSlot;
+            if not SkipChildren then impulse {
+                switch AsyncFor(Slot->ChildrenCount)
+                | LoopIteration _for |> StartAsyncTask(impulse {
+                    Slot <- Slot->GetChild(_for.Iteration);
+                    AsyncCallRelay(_relay);
+                });
+            }
+        }
+    }
+}
