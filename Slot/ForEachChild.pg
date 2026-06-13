@@ -1,0 +1,26 @@
+/// Runs a given impulse for each child of the given slot.
+/// 
+/// ### Example
+/// 
+/// ```protograph
+/// switch ForEachChild(MySlot)
+/// | OnChild _forEach |> impulse {
+///     _forEach.Child->DoSomethingWithChild();
+/// }
+/// ```
+module ForEachChild
+
+in Slot: Slot
+in OnChild: SyncImpulse
+
+out Child: Slot
+out this: SyncImpulse
+
+where {
+    ForNode = For(
+        Count = Slot->ChildrenCount,
+        LoopIteration = OnChild
+    );
+    Child = Slot->GetChild(ForNode.Iteration);
+    ForNode
+}
