@@ -1,9 +1,9 @@
 /// Rounds the given values' components to the nearest multiple of the
-/// specified precision.
+/// specified precision for each component.
 module RoundP_Float4
 
 in Value: float4
-in Precision: float
+in Precision: float4
 out this: float4
 
 where (Value / Precision)->Round_Float4 * Precision

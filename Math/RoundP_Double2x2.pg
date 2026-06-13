@@ -1,9 +1,9 @@
 /// Rounds the given values' components to the nearest multiple of the
-/// specified precision.
-module RoundP_Double2
+/// specified precision for each component.
+module RoundP_Double2x2
 
 in Value: double2
-in Precision: double
+in Precision: double2
 out this: double2
 
 where (Value / Precision)->Round_Double2 * Precision
