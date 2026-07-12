@@ -1,0 +1,11 @@
+/// Creates a quaternion from the given direction vector and roll.
+module FromDirectionRoll
+
+in Direction: float3
+in Roll: float
+
+out this: floatQ
+
+where {
+	Direction->LookRotation_floatQ * GetUp()->AxisAngle_floatQ(Roll)
+}
