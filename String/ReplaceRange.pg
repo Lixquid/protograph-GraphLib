@@ -9,8 +9,10 @@ in Replacement: string
 
 out this: string
 
-where ConcatenateMultiString([
-	String->Substring(0, StartPos),
-	Replacement,
-	String->Substring(EndPos)
-])
+where ConcatenateMultiString(
+    [
+        String->Substring(0, StartPos),
+        Replacement,
+        String->Substring(EndPos)
+    ]
+)

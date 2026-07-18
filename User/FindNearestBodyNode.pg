@@ -15,7 +15,7 @@ where impulse {
 
     _curNode <- BodyNode.NONE->NextValue;
     _distance <- 9e999;
-    
+
     while _curNode != BodyNode.NONE do impulse {
         _d = Position->Distance_Float3(User->BodyNodeSlot(_curNode)->GlobalTransform.GlobalPosition);
         if _d < _distance then impulse {

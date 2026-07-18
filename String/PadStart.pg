@@ -8,6 +8,8 @@ in PadCharacter: char
 
 out this: string
 
-where PadCharacter->ToString_Char->MultiplyString(
-	Length - String->StringLength
-)->ConcatenateString(String)
+where PadCharacter->ToString_Char
+->MultiplyString(
+    Length - String->StringLength
+)
+->ConcatenateString(String)

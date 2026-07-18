@@ -7,11 +7,11 @@ in Position: float3
 out this: Temperature
 
 where SampleNumericSpatialVariable<Temperature>(
-	Point = Position,
-	Name = "Temperature",
-	Mode = ValueSpatialVariableMode.PrioritySortedBlend,
-	BaseValue = {
-		_t = ~input<Temperature>("World/Temperature");
-		if _t.HasValue then _t.Value else 288.15d->FromBaseValue<Temperature>
-	}
+    Point=Position,
+    Name="Temperature",
+    Mode=ValueSpatialVariableMode.PrioritySortedBlend,
+    BaseValue={
+        _t = ~input<Temperature>("World/Temperature");
+        if _t.HasValue then _t.Value else 288.15d->FromBaseValue<Temperature>
+    }
 )

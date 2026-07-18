@@ -3,6 +3,7 @@ module RecursiveVisit
 in Root: Slot element
 in OnSlot: Impulse
 in OnFinish: Impulse
+
 out this: Impulse
 out Slot: Slot
 out SkipChildren: bool mutable
@@ -11,36 +12,36 @@ use Slot/GetSibling
 use NoOpImpulse
 
 where {
-	local Slot: Slot;
-	local SkipChildren: bool;
+    local Slot: Slot;
+    local SkipChildren: bool;
 
-	impulse {
-		Slot <- Root;
+    impulse {
+        Slot <- Root;
 
-		while Slot->NotNull do impulse {
-			SkipChildren <- false;
-			OnSlot;
+        while Slot->NotNull do impulse {
+            SkipChildren <- false;
+            OnSlot;
 
-			if not SkipChildren and Slot->ChildrenCount > 0 then impulse {
-				// If this slot has children, process those
-				Slot <- Slot->GetChild();
-			} else impulse {
-				// Otherwise, walk up the stack, checking either:
-				// The current node has a sibling (process that)
-				// We've reached the root (stop)
-				_sibling = Slot->GetSibling(1);
-				while _sibling->IsNull and Slot != Root do impulse {
-					Slot <- Slot->GetParentSlot();
-					NoOpImpulse;
-				};
-				if Slot == Root then impulse {
-					Slot <- null<Slot>;
-				} else impulse {
-					Slot <- _sibling;
-				}
-			}
-		};
+            if not SkipChildren and Slot->ChildrenCount > 0 then impulse {
+                // If this slot has children, process those
+                Slot <- Slot->GetChild();
+            } else impulse {
+                // Otherwise, walk up the stack, checking either:
+                // The current node has a sibling (process that)
+                // We've reached the root (stop)
+                _sibling = Slot->GetSibling(1);
+                while _sibling->IsNull and Slot != Root do impulse {
+                    Slot <- Slot->GetParentSlot();
+                    NoOpImpulse;
+                };
+                if Slot == Root then impulse {
+                    Slot <- null<Slot>;
+                } else impulse {
+                    Slot <- _sibling;
+                }
+            }
+        };
 
-		OnFinish;
-	}
+        OnFinish;
+    }
 }

@@ -4,6 +4,7 @@ module RoundP_Double2
 
 in Value: double2
 in Precision: double
+
 out this: double2
 
 where (Value / Precision)->Round_Double2 * Precision

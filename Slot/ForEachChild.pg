@@ -18,8 +18,8 @@ out this: SyncImpulse
 
 where {
     ForNode = For(
-        Count = Slot->ChildrenCount,
-        LoopIteration = OnChild
+        Count=Slot->ChildrenCount,
+        LoopIteration=OnChild
     );
     Child = Slot->GetChild(ForNode.Iteration);
     ForNode

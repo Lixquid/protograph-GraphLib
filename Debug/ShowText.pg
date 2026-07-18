@@ -9,12 +9,12 @@ in Duration: float
 out this: SyncImpulse
 
 where {
-	_root = LocalUserRoot;
-	_pos = ViewPosition + ViewRotation->Mul_FloatQ_Float3(GetForward());
-	DebugText(
-		Position = _pos,
-		Text = Text,
-		Size = 1.0,
-		Duration = Duration,
-	)
+    _root = LocalUserRoot;
+    _pos = ViewPosition + ViewRotation->Mul_FloatQ_Float3(GetForward());
+    DebugText(
+        Position=_pos,
+        Text=Text,
+        Size=1.0,
+        Duration=Duration,
+    )
 }

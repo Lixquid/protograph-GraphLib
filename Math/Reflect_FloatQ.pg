@@ -9,12 +9,12 @@ out this: floatQ
 use Math/FromDirectionRoll
 
 where {
-	_up = GetUp();
-	_dir = FloatQ * _up;
-	_roll = FloatQ->EulerAngles_floatQ->unpack.Z;
+    _up = GetUp();
+    _dir = FloatQ * _up;
+    _roll = FloatQ->EulerAngles_floatQ->unpack.Z;
 
-	FromDirectionRoll(
-		_dir->Reflect_Float3(Normal),
-		_roll
-	)
+    FromDirectionRoll(
+        _dir->Reflect_Float3(Normal),
+        _roll
+    )
 }

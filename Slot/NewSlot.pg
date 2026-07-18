@@ -9,6 +9,6 @@ out Slot: Slot
 use WellKnown/EmptySlot
 
 where impulse {
-	bind _duplicate = EmptySlot->DuplicateSlot(Destination);
-	Slot = _duplicate.Duplicate;
+    bind _duplicate = EmptySlot->DuplicateSlot(Destination);
+    Slot = _duplicate.Duplicate;
 }

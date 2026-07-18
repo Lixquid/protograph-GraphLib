@@ -7,5 +7,5 @@ in Roll: float
 out this: floatQ
 
 where {
-	Direction->LookRotation_floatQ * GetUp()->AxisAngle_floatQ(Roll)
+    Direction->LookRotation_floatQ * GetUp()->AxisAngle_floatQ(Roll)
 }

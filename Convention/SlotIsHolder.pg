@@ -5,6 +5,7 @@
 module SlotIsHolder
 
 in Slot: Slot
+
 out this: bool
 
 where Slot->ChildrenCount == 1 and Slot->GetSlotName == "Holder"

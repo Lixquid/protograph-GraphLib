@@ -6,5 +6,5 @@ module SampleAudioDSP
 out VariableName: string
 
 where {
-	VariableName = "Resonite.Audio.Filters";
+    VariableName = "Resonite.Audio.Filters";
 }

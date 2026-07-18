@@ -11,6 +11,6 @@ out this: SyncImpulse
 use Slot/NewSlot
 
 where impulse {
-	bind _new = LogRoot->NewSlot;
-	_new.Slot->SetSlotName(Message);
+    bind _new = LogRoot->NewSlot;
+    _new.Slot->SetSlotName(Message);
 }

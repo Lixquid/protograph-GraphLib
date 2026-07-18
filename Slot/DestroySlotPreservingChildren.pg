@@ -8,11 +8,11 @@ in Destination: slot
 out this: Impulse
 
 where {
-	impulse {
-		_target = Destination ?? Slot->GetParentSlot;
-		for _i = 0 to Slot->ChildrenCount - 1 do impulse {
-			Slot->GetChild(0)->SetParent(_target);
-		};
-		Slot->DestroySlot();
-	}
+    impulse {
+        _target = Destination ?? Slot->GetParentSlot;
+        for _i = 0 to Slot->ChildrenCount - 1 do impulse {
+            Slot->GetChild(0)->SetParent(_target);
+        };
+        Slot->DestroySlot();
+    }
 }

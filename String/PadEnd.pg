@@ -6,8 +6,10 @@ in String: string
 in Length: int
 in PadCharacter: char
 
-where String->ConcatenateString(
-	PadCharacter->ToString_Char->MultiplyString(
-		Length - String->StringLength
-	)
+where String
+->ConcatenateString(
+    PadCharacter->ToString_Char
+    ->MultiplyString(
+        Length - String->StringLength
+    )
 )

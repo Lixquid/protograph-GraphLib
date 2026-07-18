@@ -7,6 +7,6 @@ in Position: float3
 out this: bool
 
 where SampleValueSpatialVariable<bool>(
-	Point = Position,
-	Name = "Electric",
+    Point=Position,
+    Name="Electric",
 )

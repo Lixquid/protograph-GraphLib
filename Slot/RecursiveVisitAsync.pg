@@ -19,6 +19,7 @@ module RecursiveVisitAsync
 
 in Root: Slot element
 in OnSlot: AsyncImpulse
+
 out this: AsyncImpulse
 out Slot: Slot
 out SkipChildren: bool mutable
@@ -34,10 +35,12 @@ where {
             OnSlot;
             if not SkipChildren then impulse {
                 switch AsyncFor(Slot->ChildrenCount)
-                | LoopIteration _for |> StartAsyncTask(impulse {
-                    Slot <- Slot->GetChild(_for.Iteration);
-                    AsyncCallRelay(_relay);
-                });
+                | LoopIteration _for |> StartAsyncTask(
+                    impulse {
+                        Slot <- Slot->GetChild(_for.Iteration);
+                        AsyncCallRelay(_relay);
+                    }
+                );
             }
         }
     }

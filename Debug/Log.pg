@@ -2,6 +2,7 @@
 module Log
 
 in Message: string
+
 out this: SyncImpulse
 
 where RootSlot->~trigger("Log", Message)

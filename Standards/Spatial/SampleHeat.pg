@@ -13,7 +13,7 @@ in Position: float3
 out this: float
 
 where SampleNumericSpatialVariable<float>(
-	Point = Position,
-	Name = "Heat",
-	Mode = ValueSpatialVariableMode.Additive,
+    Point=Position,
+    Name="Heat",
+    Mode=ValueSpatialVariableMode.Additive,
 )

@@ -11,8 +11,8 @@ out this: SyncImpulse
 
 where {
     sync ChangingValue: int;
-    
+
     switch User->FireOnValueChange(ChangingValue, Impulse);
-    
-    ChangingValue<-RandomInt(-2147483648, 2147483647);
+
+    ChangingValue <- RandomInt(-2147483648, 2147483647);
 }
