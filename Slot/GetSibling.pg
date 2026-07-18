@@ -1,0 +1,17 @@
+/// Returns the Slot at the given relative position to the input Slot's parent.
+///
+/// For example:
+/// - Parent
+///     - Slot: Position -2
+///     - Slot: Position -1
+///     - Input Slot
+///     - Slot: Position 1
+///     - Slot: Position 2
+module GetSibling
+
+in Slot: Slot
+in Position: int
+
+out this: Slot
+
+where Slot->GetParentSlot->GetChild(Slot->IndexOfChild + Position)
