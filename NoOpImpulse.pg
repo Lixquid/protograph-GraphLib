@@ -1,0 +1,7 @@
+/// This impulse does nothing, but won't be optimized.
+/// Used to ameliorate https://github.com/Yellow-Dog-Man/Resonite-Issues/issues/256
+module NoOpImpulse
+
+out this: SyncImpulse
+
+where ValueIncrement<int>()
