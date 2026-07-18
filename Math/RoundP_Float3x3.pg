@@ -1,6 +1,6 @@
 /// Rounds the given values' components to the nearest multiple of the
 /// specified precision for each component.
-module RoundP_Float3
+module RoundP_Float3x3
 
 in Value: float3
 in Precision: float3
